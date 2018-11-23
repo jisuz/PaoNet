@@ -5,7 +5,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 /**
@@ -29,9 +29,9 @@ class ArticleItemViewModelTest {
 
     @Test
     fun getCodeDateAndClicks() {
-        Mockito.`when`(mDetail.click).thenReturn(2)
-        Mockito.`when`(mDetail.stow).thenReturn(3)
-        Mockito.`when`(mDetail.pubDate).thenReturn("2018/11/19")
+        `when`(mDetail.click).thenReturn(2)
+        `when`(mDetail.stow).thenReturn(3)
+        `when`(mDetail.pubDate).thenReturn("2018/11/19")
         mArticleItemViewModel = ArticleItemViewModel(mDetail)
         Assert.assertEquals("2 查看  3 收藏\t2018/11/19",mArticleItemViewModel.codeDateAndClicks)
     }

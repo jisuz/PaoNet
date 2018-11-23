@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager
 import android.support.v7.widget.SearchView
 import android.view.MenuItem
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.ditclear.paonet.R
 import com.ditclear.paonet.databinding.SearchActivityBinding
 import com.ditclear.paonet.helper.SystemBarHelper
@@ -19,6 +20,7 @@ import com.ditclear.paonet.view.base.BaseActivity
  *
  * Created by ditclear on 2017/10/21.
  */
+@Route(path = "/view/search")
 class SearchActivity : BaseActivity<SearchActivityBinding>() {
 
     override fun getLayoutId() = R.layout.search_activity

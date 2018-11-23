@@ -26,11 +26,6 @@
                 android:theme="@style/AppTheme.Translucent.Login"
                 android:windowSoftInputMode="adjustResize">
         </activity>
-        <activity
-                android:name="com.ditclear.paonet.view.search.SearchActivity"
-                android:screenOrientation="portrait"
-                android:windowSoftInputMode="stateAlwaysHidden"
-                android:theme="@style/AppTheme.Secondary"/>
         <activity android:name="com.ditclear.paonet.view.article.ArticleDetailActivity"/>
         <activity android:name="com.ditclear.paonet.view.code.CodeDetailActivity"/>
         <activity

@@ -1,6 +1,7 @@
 package com.ditclear.paonet
 
 import android.app.Application
+import com.alibaba.android.arouter.launcher.ARouter
 import com.ditclear.paonet.di.component.AppComponent
 import com.ditclear.paonet.di.component.DaggerAppComponent
 import com.ditclear.paonet.di.module.AppModule
@@ -29,6 +30,14 @@ class PaoApp : Application() {
     override fun onCreate() {
         super.onCreate()
         instance=this
+
+
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(instance);
+
         NetMgr.registerProvider(BaseNetProvider(this))
         SpUtil.init(this)
         component = DaggerAppComponent.builder().appModule(AppModule(this)).build()

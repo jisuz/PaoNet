@@ -11,7 +11,6 @@ import com.ditclear.paonet.view.home.viewmodel.MainViewModel
 import com.ditclear.paonet.view.home.viewmodel.RecentViewModel
 import com.ditclear.paonet.view.mine.viewmodel.MyArticleViewModel
 import com.ditclear.paonet.view.mine.viewmodel.MyCollectViewModel
-import com.ditclear.paonet.view.search.viewmodel.RecentSearchViewModel
 import com.ditclear.paonet.viewmodel.APPViewModelFactory
 import com.ditclear.paonet.viewmodel.ViewModelKey
 import dagger.Binds
@@ -21,7 +20,7 @@ import dagger.multibindings.IntoMap
 /**
  * 页面描述：ViewModelModule
  *
- * Created by ditclear on 2018/8/17.
+ * Created by ditclear on 2018/11/23.
  */
 @Module
 abstract class ViewModelModule{
@@ -35,12 +34,12 @@ abstract class ViewModelModule{
     @Binds
     @IntoMap
     @ViewModelKey(CodeDetailViewModel::class)
-    abstract fun bindCodeDetailViewModel(viewModel: CodeDetailViewModel):ViewModel
+    abstract fun bindCodeDetailViewModel(viewModel: CodeDetailViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(viewModel: MainViewModel):ViewModel
+    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -60,11 +59,6 @@ abstract class ViewModelModule{
 
     @Binds
     @IntoMap
-    @ViewModelKey(RecentSearchViewModel::class)
-    abstract fun bindRecentSearchViewModel(viewModel: RecentSearchViewModel):ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(MyArticleViewModel::class)
     abstract fun bindMyArticleViewModel(viewModel: MyArticleViewModel):ViewModel
 
@@ -74,6 +68,6 @@ abstract class ViewModelModule{
     abstract fun bindMyCollectViewModel(viewModel: MyCollectViewModel):ViewModel
 
     @Binds
-    abstract fun bindViewModelFactory(factory:APPViewModelFactory): ViewModelProvider.Factory
+    abstract fun bindViewModelFactory(factory: APPViewModelFactory): ViewModelProvider.Factory
 
 }

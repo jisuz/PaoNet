@@ -1,7 +1,6 @@
 package com.ditclear.paonet.helper
 
 import android.app.Activity
-import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,13 +10,13 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.view.ContextThemeWrapper
 import android.view.View
+import com.alibaba.android.arouter.launcher.ARouter
 import com.ditclear.paonet.R
 import com.ditclear.paonet.helper.transitions.FabTransform
 import com.ditclear.paonet.helper.transitions.MorphTransform
 import com.ditclear.paonet.model.data.Article
 import com.ditclear.paonet.view.article.ArticleDetailActivity
 import com.ditclear.paonet.view.auth.LoginActivity
-import com.ditclear.paonet.view.search.SearchActivity
 
 
 /**
@@ -65,8 +64,11 @@ fun needsLogin(@ColorRes color: Int, triggeringView: View,activity: Activity?=nu
     }
 }
 
-//搜索
+////搜索
 fun navigateToSearch(activity: Activity, v: View? = null) {
-        val options = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle()
-        activity.startActivity(Intent(activity, SearchActivity::class.java), options)
+//    activity.toast("未集成 p_search 模块")
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity)
+//        activity.startActivity(Intent(activity, SearchActivity::class.java), options)
+    ARouter.getInstance().build("/view/search").navigation();
+
 }
