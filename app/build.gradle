@@ -37,6 +37,10 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
+            applicationIdSuffix ".release"
+            versionNameSuffix "-release"
+            debuggable true
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -46,19 +50,41 @@ android {
             debuggable true
             signingConfig signingConfigs.debug
         }
+
+        mine{
+            applicationIdSuffix ".mine"
+            versionNameSuffix "-mine"
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
+
     }
 
     sourceSets {
         main {
 
         }
-
+        release{
+            //search
+            java.srcDirs += 'src/main/search/java'
+            manifest.srcFile 'src/main/search/AndroidManifest.xml'
+            //mine
+            java.srcDirs += 'src/main/mine/java'
+        }
         search {
             java.srcDirs += 'src/main/search/java'
             res.srcDirs += 'src/main/search/res'
             manifest.srcFile 'src/main/search/AndroidManifest.xml'
             resources.srcDirs += 'src/main/search/resources'
         }
+
+        mine {
+            java.srcDirs += 'src/main/mine/java'
+            res.srcDirs += 'src/main/mine/res'
+            resources.srcDirs += 'src/main/mine/resources'
+        }
+
+
     }
 
     dataBinding {

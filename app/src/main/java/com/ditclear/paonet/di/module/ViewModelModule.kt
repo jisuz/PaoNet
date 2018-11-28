@@ -9,8 +9,6 @@ import com.ditclear.paonet.view.code.viewmodel.CodeDetailViewModel
 import com.ditclear.paonet.view.code.viewmodel.CodeListViewModel
 import com.ditclear.paonet.view.home.viewmodel.MainViewModel
 import com.ditclear.paonet.view.home.viewmodel.RecentViewModel
-import com.ditclear.paonet.view.mine.viewmodel.MyArticleViewModel
-import com.ditclear.paonet.view.mine.viewmodel.MyCollectViewModel
 import com.ditclear.paonet.viewmodel.APPViewModelFactory
 import com.ditclear.paonet.viewmodel.ViewModelKey
 import dagger.Binds
@@ -61,15 +59,6 @@ abstract class ViewModelModule{
     @ViewModelKey(CodeListViewModel::class)
     abstract fun bindCodeListViewModel(viewModel: CodeListViewModel):ViewModel
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(MyArticleViewModel::class)
-    abstract fun bindMyArticleViewModel(viewModel: MyArticleViewModel):ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(MyCollectViewModel::class)
-    abstract fun bindMyCollectViewModel(viewModel: MyCollectViewModel):ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory:APPViewModelFactory): ViewModelProvider.Factory

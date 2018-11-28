@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.annotation.ColorRes
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.view.ContextThemeWrapper
 import android.view.View
@@ -69,4 +70,22 @@ fun navigateToSearch(activity: Activity, v: View? = null) {
 
     val transition = ActivityOptionsCompat.makeSceneTransitionAnimation(activity)
     ARouter.getInstance().build(Constants.ROUTER_SEARCH).withOptionsCompat(transition).navigation(activity)
+}
+
+fun routeToMineArticle(): Fragment? {
+    val f = ARouter.getInstance().build(Constants.ROUTER_MINE_ARTICLE).navigation()
+    return if (f is Fragment) {
+        f
+    } else {
+        null
+    }
+}
+
+fun routeToMineCollect(): Fragment? {
+    val f = ARouter.getInstance().build(Constants.ROUTER_MINE_COLLECT).navigation()
+    return if (f is Fragment) {
+        f
+    } else {
+        null
+    }
 }

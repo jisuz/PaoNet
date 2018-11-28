@@ -1,26 +1,36 @@
 package com.ditclear.paonet.view.mine
 
-import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v4.app.Fragment
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.ditclear.paonet.R
 import com.ditclear.paonet.databinding.HomeFragmentBinding
+import com.ditclear.paonet.helper.Constants
+import com.ditclear.paonet.helper.adapter.viewpager.AbstractPagerAdapter
 import com.ditclear.paonet.view.base.BaseFragment
 import com.ditclear.paonet.view.home.MainActivity
-import javax.inject.Inject
-import javax.inject.Named
 
 /**
  * 页面描述：MyCollectFragment
  *
  * Created by ditclear on 2017/10/15.
  */
-//@FragmentScope
+@Route(path = Constants.ROUTER_MINE_COLLECT)
 class MyCollectFragment : BaseFragment<HomeFragmentBinding>() {
 
-    @Inject
-    @field:Named("collect")
-    lateinit var collectAdapter: FragmentStatePagerAdapter
+    private val collectAdapter by lazy {
+        object : AbstractPagerAdapter(childFragmentManager, arrayOf("文章", "代码")) {
+            override fun getItem(pos: Int): Fragment? {
+                if (list[pos] == null) {
+                    when (pos) {
+                        0 -> list[pos] = CollectionListFragment.newInstance(1)
+                        1 -> list[pos] = CollectionListFragment.newInstance(-19)
+                    }
+                }
+                return list[pos]
+            }
+        }
+    }
 
     companion object {
 
@@ -32,11 +42,6 @@ class MyCollectFragment : BaseFragment<HomeFragmentBinding>() {
 
     override fun loadData(isRefresh: Boolean) {
 
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        getComponent().inject(this)
     }
 
     override fun initArgs(savedInstanceState: Bundle?) {

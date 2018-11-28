@@ -16,22 +16,18 @@ import com.ditclear.paonet.R
 import com.ditclear.paonet.aop.annotation.CheckLogin
 import com.ditclear.paonet.aop.annotation.SingleClick
 import com.ditclear.paonet.databinding.MainActivityBinding
-import com.ditclear.paonet.helper.SpUtil
+import com.ditclear.paonet.helper.*
 import com.ditclear.paonet.helper.adapter.recyclerview.ItemClickPresenter
 import com.ditclear.paonet.helper.adapter.recyclerview.SingleTypeAdapter
 import com.ditclear.paonet.helper.extens.async
 import com.ditclear.paonet.helper.extens.bindLifeCycle
 import com.ditclear.paonet.helper.extens.switchFragment
 import com.ditclear.paonet.helper.extens.toast
-import com.ditclear.paonet.helper.navigateToSearch
-import com.ditclear.paonet.helper.needsLogin
 import com.ditclear.paonet.model.data.User
 import com.ditclear.paonet.view.base.BaseActivity
 import com.ditclear.paonet.view.code.CodeListFragment
 import com.ditclear.paonet.view.home.viewmodel.CategoryItemViewModel
 import com.ditclear.paonet.view.home.viewmodel.MainViewModel
-import com.ditclear.paonet.view.mine.MyArticleFragment
-import com.ditclear.paonet.view.mine.MyCollectFragment
 import io.reactivex.Single
 
 
@@ -41,7 +37,7 @@ class MainActivity : BaseActivity<MainActivityBinding>(),
 
     override fun getLayoutId(): Int = R.layout.main_activity
 
-    private val viewModel  by lazy {
+    private val viewModel by lazy {
         getInjectViewModel<MainViewModel>()
     }
 
@@ -63,19 +59,23 @@ class MainActivity : BaseActivity<MainActivityBinding>(),
     val defaultEmptyUser by lazy { User() }
 
     private val homeFragment = HomeFragment.newInstance()
-    private val myArticleFragment = MyArticleFragment.newInstance()
-    private val myCollectFragment = MyCollectFragment.newInstance()
+    private val myArticleFragment: Fragment? by lazy {
+        routeToMineArticle()
+    }
+    private val myCollectFragment: Fragment? by lazy {
+        routeToMineCollect()
+    }
 
 
-    override fun loadData(isRefresh:Boolean) {
+    override fun loadData(isRefresh: Boolean) {
         viewModel.getCodeCategories().bindLifeCycle(this)
-                .subscribe ({},{})
+                .subscribe({}, {})
     }
 
 
     override fun onResume() {
         super.onResume()
-        viewModel.user.set(SpUtil.user?:defaultEmptyUser)
+        viewModel.user.set(SpUtil.user ?: defaultEmptyUser)
 
     }
 
@@ -112,7 +112,7 @@ class MainActivity : BaseActivity<MainActivityBinding>(),
             layoutManager = LinearLayoutManager(mContext)
             addItemDecoration(DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL))
         }
-        mBinding.tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+        mBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabUnselected(p0: TabLayout.Tab?) {
             }
 
@@ -130,7 +130,7 @@ class MainActivity : BaseActivity<MainActivityBinding>(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState ==null){
+        if (savedInstanceState == null) {
             changeFragment(homeFragment)
         }
     }
@@ -154,7 +154,7 @@ class MainActivity : BaseActivity<MainActivityBinding>(),
                 Single.just(isQuit)
                         .async(2000)
                         .bindLifeCycle(this)
-                        .subscribe({isQuit = false },{})
+                        .subscribe({ isQuit = false }, {})
             } else {
                 super.onBackPressed()
             }
@@ -178,19 +178,23 @@ class MainActivity : BaseActivity<MainActivityBinding>(),
 
     }
 
-    private fun closeDrawer(){
+    private fun closeDrawer() {
         mBinding.drawerLayout.closeDrawer(GravityCompat.START)
     }
 
     @CheckLogin
     private fun switchMyArticle(v: View?) {
-        changeFragment(myArticleFragment, "我的文章")
+        myArticleFragment?.let {
+            changeFragment(it, "我的文章")
+        }
         closeDrawer()
     }
 
     @CheckLogin
     private fun switchMyCollect(v: View?) {
-        changeFragment(myCollectFragment, "我的收藏")
+        myCollectFragment?.let {
+            changeFragment(it, "我的收藏")
+        }
         closeDrawer()
 
     }
@@ -200,7 +204,7 @@ class MainActivity : BaseActivity<MainActivityBinding>(),
      */
     private fun changeFragment(fragment: Fragment, title: String = "泡在网上的日子") {
         supportActionBar?.title = title
-        switchFragment(temp, fragment,fragment.javaClass.simpleName)
+        switchFragment(temp, fragment, fragment.javaClass.simpleName)
         temp = fragment
     }
 
@@ -208,8 +212,8 @@ class MainActivity : BaseActivity<MainActivityBinding>(),
         v?.run {
             when (id) {
                 R.id.toggle_btn -> toggleLog(this)
-                R.id.code_tv,R.id.toggle_cate_btn -> viewModel.toggleCategory()
-                R.id.home_tv ->{
+                R.id.code_tv, R.id.toggle_cate_btn -> viewModel.toggleCategory()
+                R.id.home_tv -> {
                     closeDrawer()
                     changeFragment(homeFragment)
                 }

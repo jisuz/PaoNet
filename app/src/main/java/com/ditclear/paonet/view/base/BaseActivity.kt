@@ -7,7 +7,6 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.annotation.NonNull
 import android.support.transition.TransitionListenerAdapter
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -15,8 +14,6 @@ import android.view.MenuItem
 import android.view.View
 import com.ditclear.paonet.BR
 import com.ditclear.paonet.PaoApp
-import com.ditclear.paonet.di.component.ActivityComponent
-import com.ditclear.paonet.di.module.ActivityModule
 import com.ditclear.paonet.helper.annotation.ToastType
 import com.ditclear.paonet.helper.extens.dispatchFailure
 import com.ditclear.paonet.helper.extens.toast
@@ -33,8 +30,6 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity(), Present
 
     protected lateinit var mContext: Context
 
-    private var activityComponent: ActivityComponent? = null
-
     protected var autoRefresh =true
     protected var delayToTransition =false
 
@@ -45,18 +40,6 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity(), Present
         }else{
             throw IllegalStateException("app is not PaoApp")
         }
-    }
-
-
-
-
-    @NonNull
-    fun getComponent(): ActivityComponent {
-        if (activityComponent == null) {
-            val mainApplication = application as PaoApp
-            activityComponent = mainApplication.component.plus(ActivityModule(this))
-        }
-        return activityComponent as ActivityComponent
     }
 
     inline fun <reified T :ViewModel> getInjectViewModel ()= ViewModelProviders.of(this,factory).get(T::class.java)

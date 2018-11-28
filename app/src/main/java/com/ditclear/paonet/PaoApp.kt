@@ -27,7 +27,7 @@ class PaoApp : Application() {
 
     companion object {
         private var instance: Application? = null
-        fun instance() = instance?:throw Throwable("instance 还未初始化")
+        fun instance() = instance ?: throw Throwable("instance 还未初始化")
     }
 
     @Inject
@@ -37,7 +37,7 @@ class PaoApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        instance=this
+        instance = this
         if (BuildConfig.DEBUG) {           // These two lines must be written before init, otherwise these configurations will be invalid in the init process
             ARouter.openLog()     // Print log
             ARouter.openDebug()   // Turn on debugging mode (If you are running in InstantRun mode, you must turn on debug mode! Online version needs to be closed, otherwise there is a security risk)
@@ -51,10 +51,11 @@ class PaoApp : Application() {
 
         Toasty.Config.getInstance().apply(); // required
 
-        val loader = ServiceLoader.load(CoreService::class.java)
-        loader.iterator().forEach {
-            Log.d("PaoNet-----",it.serviceName)
-            it.init(this)
+        val loader = ServiceLoader.load(CoreService::class.java).iterator()
+        while (loader.hasNext()) {
+            val service = loader.next()
+            Log.d("PaoNet-----", service.serviceName)
+            service.init(this)
         }
     }
 }

@@ -17,5 +17,4 @@ interface SearchComponent{
 
     fun inject(app: SearchService)
 
-//    fun plus(module: SearchActivityModule):SearchActivityComponent
 }

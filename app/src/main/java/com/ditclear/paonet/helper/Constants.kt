@@ -22,5 +22,7 @@ object Constants {
     const val DB_NAME: String = "pao.db"
 
     const val ROUTER_SEARCH = "/view/search"
+    const val ROUTER_MINE_ARTICLE = "/view/mine/article"
+    const val ROUTER_MINE_COLLECT = "/view/mine/collect"
 
 }

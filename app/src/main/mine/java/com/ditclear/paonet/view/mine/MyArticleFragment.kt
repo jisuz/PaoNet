@@ -5,10 +5,11 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.ditclear.paonet.R
 import com.ditclear.paonet.aop.annotation.SingleClick
 import com.ditclear.paonet.databinding.RefreshFragmentBinding
-import com.ditclear.paonet.di.scope.FragmentScope
+import com.ditclear.paonet.helper.Constants
 import com.ditclear.paonet.helper.adapter.recyclerview.ItemClickPresenter
 import com.ditclear.paonet.helper.adapter.recyclerview.SingleTypeAdapter
 import com.ditclear.paonet.helper.extens.bindLifeCycle
@@ -25,7 +26,7 @@ import com.ditclear.paonet.view.mine.viewmodel.MyArticleViewModel
  *
  * Created by ditclear on 2017/10/15.
  */
-//@FragmentScope
+@Route(path = Constants.ROUTER_MINE_ARTICLE)
 class MyArticleFragment : BaseFragment<RefreshFragmentBinding>(), ItemClickPresenter<ArticleItemViewModel> {
 
     private val viewModel: MyArticleViewModel  by lazy {

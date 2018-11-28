@@ -7,15 +7,12 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.annotation.NonNull
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.ditclear.paonet.BR
-import com.ditclear.paonet.di.component.FragmentComponent
-import com.ditclear.paonet.di.module.FragmentModule
 import com.ditclear.paonet.helper.annotation.ToastType
 import com.ditclear.paonet.helper.extens.dispatchFailure
 import com.ditclear.paonet.helper.extens.toast
@@ -52,25 +49,6 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment(), Presenter {
             return@lazy baseActivity.factory
         }else{
             throw IllegalStateException("app is not PaoApp")
-        }
-    }
-
-    private var fragmentComponent: FragmentComponent? = null
-    protected lateinit var fragmentComponentBuilder: FragmentComponent.Builder
-    @NonNull
-    fun getComponent(): FragmentComponent {
-        if (fragmentComponent != null) {
-            return fragmentComponent as FragmentComponent
-        }
-
-        val activity = activity
-        if (activity is BaseActivity<*>) {
-            fragmentComponentBuilder = activity.getComponent().supplyFragmentComponentBuilder()
-            fragmentComponent = fragmentComponentBuilder.fragmentModule(FragmentModule(this)).build()
-            return fragmentComponent as FragmentComponent
-        } else {
-            throw IllegalStateException(
-                    "The activity of this fragment is not an instance of BaseActivity")
         }
     }
 
