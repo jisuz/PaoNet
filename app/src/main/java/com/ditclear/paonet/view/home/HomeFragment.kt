@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.ditclear.paonet.R
 import com.ditclear.paonet.databinding.HomeFragmentBinding
-import com.ditclear.paonet.di.scope.FragmentScope
 import com.ditclear.paonet.view.base.BaseFragment
 import com.ditclear.paonet.view.home.viewmodel.ToTopOrRefreshContract
 import javax.inject.Inject
@@ -16,7 +15,7 @@ import javax.inject.Named
  *
  * Created by ditclear on 2017/9/30.
  */
-@FragmentScope
+//@FragmentScope
 class HomeFragment : BaseFragment<HomeFragmentBinding>() {
 
 

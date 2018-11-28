@@ -8,10 +8,8 @@ import com.ditclear.paonet.helper.Constants
 import com.ditclear.paonet.helper.adapter.viewpager.AbstractPagerAdapter
 import com.ditclear.paonet.helper.annotation.ArticleType
 import com.ditclear.paonet.view.article.ArticleListFragment
-import com.ditclear.paonet.view.code.CodeListFragment
 import com.ditclear.paonet.view.home.RecentFragment
 import com.ditclear.paonet.view.mine.CollectionListFragment
-import com.ditclear.paonet.view.search.SearchResultFragment
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -71,24 +69,6 @@ class FragmentModule(private val fragment: Fragment) {
                 }
                 return list[pos]
             }
-        }
-    }
-
-    @Provides
-    @Named(Constants.Qualifier_SEARCH)
-    fun provideSearchPagerAdapter(): FragmentStatePagerAdapter {
-        return object : AbstractPagerAdapter(fragment.childFragmentManager, arrayOf("文章", "代码")) {
-            val keyWord= (fragment as? SearchResultFragment)?.keyWord ?: ""
-            override fun getItem(pos: Int): Fragment? {
-                if (list[pos] == null) {
-                    when (pos) {
-                        0 -> list[pos] = ArticleListFragment.newInstance(keyWord)
-                        1 -> list[pos] = CodeListFragment.newInstance(keyWord)
-                    }
-                }
-                return list[pos]
-            }
-
         }
     }
 

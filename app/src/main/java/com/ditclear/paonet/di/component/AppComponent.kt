@@ -1,6 +1,6 @@
 package com.ditclear.paonet.di.component
 
-import android.app.Application
+import com.ditclear.paonet.PaoApp
 import com.ditclear.paonet.di.module.ActivityModule
 import com.ditclear.paonet.di.module.AppModule
 import com.ditclear.paonet.di.module.ViewModelModule
@@ -16,7 +16,8 @@ import javax.inject.Singleton
 @Component(modules = [(AppModule::class), (ViewModelModule::class)])
 interface AppComponent{
 
-    fun inject(app: Application)
+    fun inject(app: PaoApp)
 
     fun plus(module: ActivityModule):ActivityComponent
+
 }

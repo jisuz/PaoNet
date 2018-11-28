@@ -23,7 +23,7 @@ import javax.inject.Inject
  *
  * Created by ditclear on 2017/10/3.
  */
-@ActivityScope
+//@ActivityScope
 class CodeDetailViewModel @Inject
 constructor(private val repo: PaoRepository, private val userRepo: UserRepository) : BaseViewModel() {
 

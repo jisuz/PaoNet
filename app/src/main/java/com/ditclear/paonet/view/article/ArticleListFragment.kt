@@ -99,7 +99,7 @@ class ArticleListFragment : BaseFragment<RefreshFragmentBinding>(), ItemClickPre
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        getComponent().inject(this)
+        //getComponent().inject(this)
 
     }
 

@@ -17,7 +17,7 @@ import javax.inject.Inject
  *
  * Created by ditclear on 2017/10/27.
  */
-@ActivityScope
+//@ActivityScope
 class MainViewModel @Inject constructor(val repo: PaoService) : BaseViewModel() {
 
     val user = ObservableField<User>(User())

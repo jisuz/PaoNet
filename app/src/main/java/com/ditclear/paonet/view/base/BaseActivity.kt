@@ -20,7 +20,6 @@ import com.ditclear.paonet.di.module.ActivityModule
 import com.ditclear.paonet.helper.annotation.ToastType
 import com.ditclear.paonet.helper.extens.dispatchFailure
 import com.ditclear.paonet.helper.extens.toast
-import javax.inject.Inject
 
 
 /**
@@ -39,8 +38,17 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity(), Present
     protected var autoRefresh =true
     protected var delayToTransition =false
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
+    val factory:ViewModelProvider.Factory by lazy {
+        if (application is PaoApp) {
+            val mainApplication = application as PaoApp
+           return@lazy mainApplication.factory
+        }else{
+            throw IllegalStateException("app is not PaoApp")
+        }
+    }
+
+
+
 
     @NonNull
     fun getComponent(): ActivityComponent {

@@ -9,8 +9,6 @@ import com.ditclear.paonet.view.home.RecentFragment
 import com.ditclear.paonet.view.mine.CollectionListFragment
 import com.ditclear.paonet.view.mine.MyArticleFragment
 import com.ditclear.paonet.view.mine.MyCollectFragment
-import com.ditclear.paonet.view.search.RecentSearchFragment
-import com.ditclear.paonet.view.search.SearchResultFragment
 import dagger.Subcomponent
 
 /**
@@ -18,11 +16,12 @@ import dagger.Subcomponent
  *
  * Created by ditclear on 2017/9/29.
  */
-@FragmentScope
-@Subcomponent(modules = arrayOf(FragmentModule::class))
+//@FragmentScope
+@Subcomponent(modules = [FragmentModule::class])
 interface FragmentComponent {
 
     fun inject(fragment: ArticleListFragment)
+
     fun inject(fragment: CodeListFragment)
 
     fun inject(fragment: CollectionListFragment)
@@ -33,11 +32,6 @@ interface FragmentComponent {
 
     fun inject(fragment: RecentFragment)
 
-
-    fun inject(fragment: SearchResultFragment)
-
-    fun inject(fragment: RecentSearchFragment)
-
     fun inject(fragment: MyArticleFragment)
 
     @Subcomponent.Builder
@@ -46,4 +40,5 @@ interface FragmentComponent {
 
         fun build(): FragmentComponent
     }
+
 }

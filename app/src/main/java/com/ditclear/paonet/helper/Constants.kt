@@ -21,4 +21,6 @@ object Constants {
     const val VIEW_NAME_TITLE ="view_name_title"
     const val DB_NAME: String = "pao.db"
 
+    const val ROUTER_SEARCH = "/view/search"
+
 }

@@ -2,16 +2,15 @@ package com.ditclear.paonet.di.module
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.ditclear.paonet.di.scope.ActivityScope
 import com.ditclear.paonet.view.article.viewmodel.ArticleDetailViewModel
 import com.ditclear.paonet.view.article.viewmodel.ArticleListViewModel
+import com.ditclear.paonet.view.auth.viewmodel.LoginViewModel
 import com.ditclear.paonet.view.code.viewmodel.CodeDetailViewModel
 import com.ditclear.paonet.view.code.viewmodel.CodeListViewModel
 import com.ditclear.paonet.view.home.viewmodel.MainViewModel
 import com.ditclear.paonet.view.home.viewmodel.RecentViewModel
 import com.ditclear.paonet.view.mine.viewmodel.MyArticleViewModel
 import com.ditclear.paonet.view.mine.viewmodel.MyCollectViewModel
-import com.ditclear.paonet.view.search.viewmodel.RecentSearchViewModel
 import com.ditclear.paonet.viewmodel.APPViewModelFactory
 import com.ditclear.paonet.viewmodel.ViewModelKey
 import dagger.Binds
@@ -28,7 +27,6 @@ abstract class ViewModelModule{
 
     @Binds
     @IntoMap
-    @ActivityScope
     @ViewModelKey(ArticleDetailViewModel::class)
     abstract fun bindArticleDetailViewModel(viewModel: ArticleDetailViewModel):ViewModel
 
@@ -49,6 +47,11 @@ abstract class ViewModelModule{
 
     @Binds
     @IntoMap
+    @ViewModelKey(LoginViewModel::class)
+    abstract fun bindLoginViewModel(viewModel: LoginViewModel):ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(ArticleListViewModel::class)
     abstract fun bindArticleListViewModel(viewModel: ArticleListViewModel):ViewModel
 
@@ -57,11 +60,6 @@ abstract class ViewModelModule{
     @IntoMap
     @ViewModelKey(CodeListViewModel::class)
     abstract fun bindCodeListViewModel(viewModel: CodeListViewModel):ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(RecentSearchViewModel::class)
-    abstract fun bindRecentSearchViewModel(viewModel: RecentSearchViewModel):ViewModel
 
     @Binds
     @IntoMap

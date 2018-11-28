@@ -58,7 +58,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailActivityBinding>() {
             finish()
         }
 
-        getComponent().inject(this)
+        //getComponent().inject(this)
 
         mBinding.vm = viewModel.apply {
             mArticle?.let {

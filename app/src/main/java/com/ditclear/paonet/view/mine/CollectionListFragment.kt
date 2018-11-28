@@ -8,7 +8,6 @@ import android.view.View
 import com.ditclear.paonet.R
 import com.ditclear.paonet.aop.annotation.SingleClick
 import com.ditclear.paonet.databinding.RefreshFragmentBinding
-import com.ditclear.paonet.di.scope.FragmentScope
 import com.ditclear.paonet.helper.adapter.recyclerview.ItemClickPresenter
 import com.ditclear.paonet.helper.adapter.recyclerview.SingleTypeAdapter
 import com.ditclear.paonet.helper.extens.bindLifeCycle
@@ -25,7 +24,7 @@ import com.ditclear.paonet.view.mine.viewmodel.MyCollectViewModel
  *
  * Created by ditclear on 2017/10/15.
  */
-@FragmentScope
+//@FragmentScope
 class CollectionListFragment : BaseFragment<RefreshFragmentBinding>(), ItemClickPresenter<ArticleItemViewModel> {
 
     private val viewModel: MyCollectViewModel  by lazy {
@@ -87,7 +86,7 @@ class CollectionListFragment : BaseFragment<RefreshFragmentBinding>(), ItemClick
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        getComponent().inject(this)
+        //getComponent().inject(this)
 
 
     }

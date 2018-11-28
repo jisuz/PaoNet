@@ -101,7 +101,7 @@ class MainActivity : BaseActivity<MainActivityBinding>(),
     }
 
     override fun initView() {
-        getComponent().inject(this)
+        //getComponent().inject(this)
         setSupportActionBar(mBinding.toolbar)
         syncToolBar(mBinding.toolbar)
 

@@ -78,7 +78,7 @@ class RecentSearchFragment : BaseFragment<RecentSearchFragmentBinding>(), ItemCl
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        getComponent().inject(this)
+//        //getComponent().inject(this)
     }
 
     override fun initView() {

@@ -12,7 +12,6 @@ import com.ditclear.paonet.helper.transitions.MorphTransform
 import com.ditclear.paonet.model.data.User
 import com.ditclear.paonet.view.auth.viewmodel.LoginViewModel
 import com.ditclear.paonet.view.base.BaseActivity
-import javax.inject.Inject
 
 /**
  * 页面描述：LoginActivity
@@ -21,8 +20,7 @@ import javax.inject.Inject
  */
 class LoginActivity : BaseActivity<LoginActivityBinding>() {
 
-    @Inject
-    lateinit var viewModel: LoginViewModel
+    private val viewModel by lazy { getInjectViewModel<LoginViewModel>() }
 
     //login success
     fun onLoginSuccess(user: User?) {
@@ -35,7 +33,7 @@ class LoginActivity : BaseActivity<LoginActivityBinding>() {
     }
 
     override fun initView() {
-        getComponent().inject(this)
+        //getComponent().inject(this)
         mBinding.run {
             vm = viewModel.apply {
                 showLogin .set(SpUtil.user == null)

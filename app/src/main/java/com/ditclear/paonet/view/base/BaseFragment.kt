@@ -19,7 +19,6 @@ import com.ditclear.paonet.di.module.FragmentModule
 import com.ditclear.paonet.helper.annotation.ToastType
 import com.ditclear.paonet.helper.extens.dispatchFailure
 import com.ditclear.paonet.helper.extens.toast
-import javax.inject.Inject
 
 
 /**
@@ -47,8 +46,14 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment(), Presenter {
      */
     protected var hasLoadOnce: Boolean = false
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
+    val factory:ViewModelProvider.Factory by lazy {
+        if (activity is BaseActivity<*>) {
+            val baseActivity = activity as BaseActivity<*>
+            return@lazy baseActivity.factory
+        }else{
+            throw IllegalStateException("app is not PaoApp")
+        }
+    }
 
     private var fragmentComponent: FragmentComponent? = null
     protected lateinit var fragmentComponentBuilder: FragmentComponent.Builder

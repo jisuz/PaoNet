@@ -25,7 +25,7 @@ import com.ditclear.paonet.view.mine.viewmodel.MyArticleViewModel
  *
  * Created by ditclear on 2017/10/15.
  */
-@FragmentScope
+//@FragmentScope
 class MyArticleFragment : BaseFragment<RefreshFragmentBinding>(), ItemClickPresenter<ArticleItemViewModel> {
 
     private val viewModel: MyArticleViewModel  by lazy {
@@ -65,7 +65,7 @@ class MyArticleFragment : BaseFragment<RefreshFragmentBinding>(), ItemClickPrese
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        getComponent().inject(this)
+        //getComponent().inject(this)
 
     }
 

@@ -11,8 +11,11 @@ import javax.inject.Provider
  * Created by ditclear on 2018/8/17.
  */
 class APPViewModelFactory @Inject constructor(private val creators:Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>): ViewModelProvider.Factory{
+    private val innerMap = hashMapOf<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>().apply {
+        putAll(creators)
+    }
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        val creator = creators[modelClass]?:creators.entries.firstOrNull{
+        val creator = innerMap[modelClass]?:innerMap.entries.firstOrNull{
             modelClass.isAssignableFrom(it.key)
         }?.value?:throw IllegalArgumentException("unknown model class $modelClass")
         try {
@@ -21,6 +24,10 @@ class APPViewModelFactory @Inject constructor(private val creators:Map<Class<out
         } catch (e: Exception) {
             throw RuntimeException(e)
         }
+    }
+
+    fun plusMap(map:Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>){
+        this.innerMap.putAll(map)
     }
 
 }

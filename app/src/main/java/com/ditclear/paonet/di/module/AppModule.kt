@@ -44,4 +44,5 @@ class AppModule(val app:Application){
     @Provides
     fun provideUserDao(context:Application):UserDao = AppDatabase.getInstance(context).userDao()
 
+
 }

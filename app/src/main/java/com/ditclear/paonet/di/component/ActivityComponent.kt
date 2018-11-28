@@ -1,7 +1,6 @@
 package com.ditclear.paonet.di.component
 
 import com.ditclear.paonet.di.module.ActivityModule
-import com.ditclear.paonet.di.scope.ActivityScope
 import com.ditclear.paonet.view.article.ArticleDetailActivity
 import com.ditclear.paonet.view.auth.LoginActivity
 import com.ditclear.paonet.view.code.CodeDetailActivity
@@ -13,7 +12,7 @@ import dagger.Subcomponent
  *
  * Created by ditclear on 2017/9/29.
  */
-@ActivityScope
+//@ActivityScope
 @Subcomponent(modules = arrayOf(ActivityModule::class))
 interface ActivityComponent {
 
